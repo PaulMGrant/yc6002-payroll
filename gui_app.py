@@ -1,11 +1,6 @@
 """
 Simple Tkinter GUI for YeoConnect with login and
 basic employee/contract creation and payroll run.
-
-Assumes:
-- db.initialise_database() also creates a 'users' table, or
-  you run a separate script to create at least one user.
-- Passwords are stored as salted hashes (see hash_password()).
 """
 
 from __future__ import annotations
@@ -114,7 +109,7 @@ class LoginWindow(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
         self.title("YeoConnect Login")
-        self.geometry("300x180")
+        self.geometry("600x360")
         self.resizable(False, False)
 
         self.username_var = tk.StringVar()
