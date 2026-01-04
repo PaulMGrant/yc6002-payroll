@@ -88,3 +88,28 @@ def initialise_database() -> None:
             )
             """
         )
+
+
+def dump_database(dump_path: Path | str = "yeoconnect_dump.sql") -> None:
+    """
+    Write a full SQL dump of the current database to a file.
+    """
+    dump_path = Path(dump_path)
+
+    # Open a direct connection so we can call iterdump().
+    connection = sqlite3.connect(DB_PATH)
+    try:
+        with dump_path.open("w", encoding="utf-8") as dump_file:
+            for line in connection.iterdump():
+                dump_file.write(f"{line}\n")
+    finally:
+        connection.close()
+
+#run the db dump
+if __name__ == "__main__":
+    from pathlib import Path
+
+    initialise_database()  # optional, but safe
+    dump_database(Path("yeoconnect_dump.sql"))
+    print("Dump written to yeoconnect_dump.sql")
+
